@@ -1,14 +1,6 @@
-import ProfileHeader from "@/components/shared/ProfileHeader";
-import ThreadsTab from "@/components/shared/ThreadsTab";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { profileTabs } from "@/constants";
-import {
-  fetchUser,
-  fetchUserPosts,
-  fetchUsers,
-} from "@/lib/actions/user.actions";
+import UserCard from "@/components/cards/UserCard";
+import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 
 async function Page() {
@@ -28,6 +20,24 @@ async function Page() {
   return (
     <section>
       <h1 className="mb-10 head-text">Search</h1>
+      <div className="flex flex-col mt-14 gap-9">
+        {result.users.length === 0 ? (
+          <p className="no-result">No users</p>
+        ) : (
+          <>
+            {result.users.map((person) => (
+              <UserCard
+                key={person.id}
+                id={person.id}
+                name={person.name}
+                username={person.username}
+                imgUrl={person.image}
+                personType="User"
+              />
+            ))}
+          </>
+        )}
+      </div>
     </section>
   );
 }
