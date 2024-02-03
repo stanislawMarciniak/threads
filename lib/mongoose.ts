@@ -5,7 +5,7 @@ let isConnected = false;
 export const connectToDB = async () => {
   mongoose.set("strictQuery", true);
 
-  if (!process.env.MONGODB_URL) return console.log("Missing MongoDB URL");
+  if (!process.env.MONGODB_URI) return console.log("Missing MongoDB URL");
 
   if (isConnected) {
     console.log("MongoDB connection already established");
@@ -13,7 +13,7 @@ export const connectToDB = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URL);
+    await mongoose.connect(process.env.MONGODB_URI);
 
     isConnected = true;
     console.log("MongoDB connected");
