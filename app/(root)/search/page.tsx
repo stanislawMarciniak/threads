@@ -1,9 +1,16 @@
-import UserCard from "@/components/cards/UserCard";
-import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
-import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { currentUser } from "@clerk/nextjs";
 
-async function Page() {
+import UserCard from "@/components/cards/UserCard";
+import Searchbar from "@/components/shared/Searchbar";
+
+import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
+
+async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
   const user = await currentUser();
   if (!user) return null;
 
@@ -12,17 +19,20 @@ async function Page() {
 
   const result = await fetchUsers({
     userId: user.id,
-    searchString: "",
-    pageNumber: 1,
+    searchString: searchParams.q,
+    pageNumber: searchParams?.page ? +searchParams.page : 1,
     pageSize: 25,
   });
 
   return (
     <section>
       <h1 className="mb-10 head-text">Search</h1>
+
+      <Searchbar routeType="search" />
+
       <div className="flex flex-col mt-14 gap-9">
         {result.users.length === 0 ? (
-          <p className="no-result">No users</p>
+          <p className="no-result">No Result</p>
         ) : (
           <>
             {result.users.map((person) => (
