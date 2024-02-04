@@ -14,6 +14,7 @@ const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
 
   if (accountType === "Community") {
     result = await fetchCommunityPosts(accountId);
+    console.log("result", result);
   } else {
     result = await fetchUserPosts(accountId);
   }
@@ -38,7 +39,7 @@ const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
                   id: thread.author.id,
                 }
           }
-          community={thread.community}
+          community={accountType === "Community" ? result : thread.community}
           createdAt={thread.createdAt}
           comments={thread.children}
         />
