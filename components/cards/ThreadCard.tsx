@@ -102,7 +102,7 @@ const ThreadCard = ({
                   height={24}
                   className="object-contain cursor-pointer"
                 /> */}
-                <ShareButton content={content} />
+                <ShareButton content={content} id={id} />
               </div>
               {isComment && comments.length > 0 && (
                 <Link href={`/thread/${id}`}>

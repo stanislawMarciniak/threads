@@ -25,19 +25,29 @@ function DeleteThread({
 
   if (currentUserId !== authorId || pathname === "/") return null;
 
+  const handleDeleteClick = async () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this thread?"
+    );
+    if (!isConfirmed) {
+      return;
+    }
+
+    await deleteThread(JSON.parse(threadId), pathname);
+
+    if (!parentId || !isComment) {
+      router.push("/");
+    }
+  };
+
   return (
     <Image
       src="/assets/delete.svg"
-      alt="delte"
+      alt="delete"
       width={18}
       height={18}
-      className="cursor-pointer object-contain"
-      onClick={async () => {
-        await deleteThread(JSON.parse(threadId), pathname);
-        if (!parentId || !isComment) {
-          router.push("/");
-        }
-      }}
+      className="object-contain cursor-pointer"
+      onClick={handleDeleteClick}
     />
   );
 }

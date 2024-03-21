@@ -4,23 +4,24 @@ import Image from "next/image";
 
 interface ShareButtonProps {
   content: string;
+  id: string;
 }
 
-const ShareButton: React.FC<ShareButtonProps> = ({ content }) => {
+const ShareButton: React.FC<ShareButtonProps> = ({ content, id }) => {
   const share = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
           title: "Check out this thread!",
           text: content,
-          url: window.location.href,
+          url: `/thread/${id}`,
         });
       } catch (error) {
         console.error("Error sharing:", error);
       }
     } else {
       navigator.clipboard
-        .writeText(window.location.href)
+        .writeText(`/thread/${id}`)
         .then(() => alert("Link copied to clipboard"))
         .catch((err) => console.error("Error copying link to clipboard", err));
     }
