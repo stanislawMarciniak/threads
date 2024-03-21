@@ -1,6 +1,11 @@
 import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const ShareButton = dynamic(() => import("../shared/ShareButton"), {
+  ssr: false, // Disable Server-Side Rendering for this component
+});
 
 interface Props {
   id: string;
@@ -67,15 +72,19 @@ const ThreadCard = ({
             </Link>
             <p className="mt-2 text-small-regular text-light-2">{content}</p>
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
-              <div className="flex gap-3.5">
-                <Image
+              <div className="flex gap-5">
+                {/* <Image
                   src="/assets/heart-gray.svg"
                   alt="heart icon"
                   width={24}
                   height={24}
                   className="object-contain cursor-pointer"
-                />
-                <Link href={`/thread/${id}`}>
+                /> */}
+                <Link
+                  href={`/thread/${id}`}
+                  className="flex items-center text-subtle-medium text-gray-1"
+                >
+                  <p className="mr-2">Reply </p>
                   <Image
                     src="/assets/reply.svg"
                     alt="reply icon"
@@ -85,20 +94,14 @@ const ThreadCard = ({
                   />
                 </Link>
 
-                <Image
+                {/* <Image
                   src="/assets/repost.svg"
                   alt="repost icon"
                   width={24}
                   height={24}
                   className="object-contain cursor-pointer"
-                />
-                <Image
-                  src="/assets/share.svg"
-                  alt="share icon"
-                  width={24}
-                  height={24}
-                  className="object-contain cursor-pointer"
-                />
+                /> */}
+                <ShareButton content={content} />
               </div>
               {isComment && comments.length > 0 && (
                 <Link href={`/thread/${id}`}>
@@ -109,23 +112,24 @@ const ThreadCard = ({
           </div>
         </div>
       </div>
-      {!isComment && community && (
-        <Link
-          href={`/communities/${community.id}`}
-          className="flex items-center mt-5"
-        >
-          <p className="text-subtle-medium text-gray-1">
-            {formatDateString(createdAt)} - {community.name} Community
-          </p>
-          <Image
-            src={community.image}
-            alt={community.name}
-            width={14}
-            height={14}
-            className="object-cover ml-1 rounded-full"
-          />
-        </Link>
-      )}
+      <div className="flex items-center mt-5 text-subtle-medium text-gray-1">
+        <p>{formatDateString(createdAt)}</p>
+        {!isComment && community && (
+          <Link
+            href={`/communities/${community.id}`}
+            className="flex items-center"
+          >
+            <p> - {community.name} Community</p>
+            <Image
+              src={community.image}
+              alt={community.name}
+              width={14}
+              height={14}
+              className="object-cover ml-1 rounded-full"
+            />
+          </Link>
+        )}
+      </div>
     </article>
   );
 };
