@@ -2,6 +2,7 @@ import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import DeleteThread from "../forms/DeleteThread";
 
 const ShareButton = dynamic(() => import("../shared/ShareButton"), {
   ssr: false, // Disable Server-Side Rendering for this component
@@ -111,6 +112,13 @@ const ThreadCard = ({
             </div>
           </div>
         </div>
+        <DeleteThread
+          threadId={JSON.stringify(id)}
+          currentUserId={currentUserId}
+          authorId={author.id}
+          parentId={parentId}
+          isComment={isComment}
+        />
       </div>
       <div className="flex items-center mt-5 text-subtle-medium text-gray-1">
         <p>{formatDateString(createdAt)}</p>
