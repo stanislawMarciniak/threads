@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 
 interface Props {
@@ -7,17 +8,18 @@ interface Props {
   username: string;
   imgUrl: string;
   bio: string;
-  type?: "User" | "Community";
+  type?: string;
 }
 
-const ProfileHeader = ({
+function ProfileHeader({
   accountId,
   authUserId,
-  username,
   name,
+  username,
   imgUrl,
   bio,
-}: Props) => {
+  type,
+}: Props) {
   return (
     <div className="flex flex-col justify-start w-full">
       <div className="flex items-center justify-between">
@@ -25,11 +27,12 @@ const ProfileHeader = ({
           <div className="relative object-cover w-20 h-20">
             <Image
               src={imgUrl}
-              alt="Profile image"
+              alt="logo"
               fill
               className="object-cover rounded-full shadow-2xl"
             />
           </div>
+
           <div className="flex-1">
             <h2 className="text-left text-heading3-bold text-light-1">
               {name}
@@ -37,12 +40,27 @@ const ProfileHeader = ({
             <p className="text-base-medium text-gray-1">@{username}</p>
           </div>
         </div>
+        {accountId === authUserId && type !== "Community" && (
+          <Link href="/profile/edit">
+            <div className="flex gap-3 px-4 py-2 rounded-lg cursor-pointer bg-dark-3">
+              <Image
+                src="/assets/edit.svg"
+                alt="edit profile"
+                width={16}
+                height={16}
+              />
+
+              <p className="text-light-2 max-sm:hidden">Edit</p>
+            </div>
+          </Link>
+        )}
       </div>
 
       <p className="max-w-lg mt-6 text-base-regular text-light-2">{bio}</p>
-      <div className="mt-12 h-0.5 w-full bg-dark-3" />
+
+      <div className="mt-12 h-0.5 w-full bg-dark-primary-500" />
     </div>
   );
-};
+}
 
 export default ProfileHeader;

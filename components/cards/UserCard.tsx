@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Props {
   id: string;
@@ -14,8 +15,13 @@ interface Props {
 
 const UserCard = ({ id, name, username, imgUrl, personType }: Props) => {
   const router = useRouter();
+  const isCommunity = personType === "Community";
+
   return (
-    <article className="user-card">
+    <Link
+      className="user-card"
+      href={isCommunity ? `/communities/${id}` : `/profile/${id}`}
+    >
       <div className="user-card_avatar">
         <Image
           src={imgUrl}
@@ -31,11 +37,17 @@ const UserCard = ({ id, name, username, imgUrl, personType }: Props) => {
       </div>
       <Button
         className="user-card_btn"
-        onClick={() => router.push(`/profile/${id}`)}
+        onClick={() => {
+          if (isCommunity) {
+            router.push(`/communities/${id}`);
+          } else {
+            router.push(`/profile/${id}`);
+          }
+        }}
       >
         View
       </Button>
-    </article>
+    </Link>
   );
 };
 

@@ -4,6 +4,7 @@ import UserCard from "../cards/UserCard";
 
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import { fetchUsers } from "@/lib/actions/user.actions";
+import { Separator } from "../ui/separator";
 
 async function RightSidebar() {
   const user = await currentUser();
@@ -46,6 +47,7 @@ async function RightSidebar() {
           )}
         </div>
       </div>
+      <Separator className="bg-dark-primary-500" />
 
       <div className="flex flex-col justify-start flex-1">
         <h3 className="text-heading4-medium text-light-1">Similar Minds</h3>

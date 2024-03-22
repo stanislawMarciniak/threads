@@ -25,7 +25,10 @@ function DeleteThread({
 
   if (currentUserId !== authorId || pathname === "/") return null;
 
-  const handleDeleteClick = async () => {
+  const handleDeleteClick = async (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this thread?"
     );

@@ -5,6 +5,7 @@ import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { Separator } from "../ui/separator";
 
 function LeftSidebar() {
   const router = useRouter();
@@ -25,7 +26,9 @@ function LeftSidebar() {
             <Link
               href={link.route}
               key={link.label}
-              className={`leftsidebar_link ${isActive && "bg-primary-500"}`}
+              className={`leftsidebar_link border border-transparent ${
+                isActive ? "bg-primary-500" : "hover:border-primary-500"
+              }`}
             >
               <Image
                 src={link.imgURL}
@@ -40,6 +43,7 @@ function LeftSidebar() {
       </div>
       <div className="px-6 mt-10">
         <SignedIn>
+          <Separator className="my-4 bg-dark-primary-500" />
           <SignOutButton signOutCallback={() => router.push("/sign-in")}>
             <div className="flex gap-4 p-4 cursor-pointer">
               <Image
