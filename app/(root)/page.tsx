@@ -19,8 +19,6 @@ async function Home({
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
-  console.log(userInfo);
-
   const result = await fetchPosts(
     searchParams.page ? +searchParams.page : 1,
     30
@@ -28,7 +26,7 @@ async function Home({
   return (
     <>
       <PostThread
-        userId={JSON.stringify(userInfo._id)}
+        userId={userInfo._id}
         userName={userInfo?.name?.split(" ")[0]}
       />
       <section className="flex flex-col gap-10 mt-9">
