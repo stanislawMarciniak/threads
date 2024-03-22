@@ -10,21 +10,21 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 
 import { ThreadValidation } from "@/lib/validations/thread";
 import { createThread } from "@/lib/actions/thread.actions";
 import { useOrganization } from "@clerk/nextjs";
+import { Input } from "../ui/input";
 
 interface Props {
   userId: string;
+  userName: string;
 }
 
-function PostThread({ userId }: Props) {
+function PostThread({ userId, userName }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const { organization } = useOrganization();
@@ -52,26 +52,28 @@ function PostThread({ userId }: Props) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col justify-start gap-10 mt-10"
+        className="flex justify-start gap-5 mt-10 min-h-[6rem]"
       >
         <FormField
           control={form.control}
           name="thread"
           render={({ field }) => (
             <FormItem className="flex flex-col w-full gap-3">
-              <FormLabel className="text-base-semibold text-light-2">
-                Content
-              </FormLabel>
               <FormControl className="border no-focus border-dark-4 bg-dark-3 text-light-1">
-                <Textarea rows={15} {...field} />
+                <Input
+                  placeholder={`What are you thinking about, ${userName}?`}
+                  type="text"
+                  className="account-form_input no-focus"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="bg-primary-500">
-          Post Thread
+        <Button type="submit" className="rounded-full bg-primary-500">
+          +
         </Button>
       </form>
     </Form>

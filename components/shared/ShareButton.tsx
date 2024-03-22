@@ -8,7 +8,8 @@ interface ShareButtonProps {
 }
 
 const ShareButton: React.FC<ShareButtonProps> = ({ content, id }) => {
-  const share = async () => {
+  const share = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     if (navigator.share) {
       try {
         await navigator.share({

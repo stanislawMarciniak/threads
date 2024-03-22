@@ -6,6 +6,7 @@ import Pagination from "@/components/shared/Pagination";
 
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
+import PostThread from "@/components/forms/PostThread";
 
 async function Home({
   searchParams,
@@ -18,14 +19,18 @@ async function Home({
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
+  console.log(userInfo);
+
   const result = await fetchPosts(
     searchParams.page ? +searchParams.page : 1,
     30
   );
   return (
     <>
-      <h1 className="text-left head-text">Home</h1>
-
+      <PostThread
+        userId={JSON.stringify(userInfo._id)}
+        userName={userInfo?.name?.split(" ")[0]}
+      />
       <section className="flex flex-col gap-10 mt-9">
         {result.posts.length === 0 ? (
           <p className="no-result">No threads found</p>
