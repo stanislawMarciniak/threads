@@ -74,7 +74,9 @@ const ThreadCard = ({
             <p className="mt-2 text-small-regular text-light-2">{content}</p>
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className="flex gap-5">
-                {/* <Image
+                {/*
+                TODO liking option
+                <Image
                   src="/assets/heart-gray.svg"
                   alt="heart icon"
                   width={24}
@@ -95,14 +97,16 @@ const ThreadCard = ({
                   />
                 </Link>
 
-                {/* <Image
+                {/* 
+                TODO reposting option
+                <Image
                   src="/assets/repost.svg"
                   alt="repost icon"
                   width={24}
                   height={24}
                   className="object-contain cursor-pointer"
                 /> */}
-                <ShareButton content={content} id={id} />
+                <ShareButton content={content} id={JSON.stringify(id)} />
               </div>
               {isComment && comments.length > 0 && (
                 <Link href={`/thread/${id}`}>
