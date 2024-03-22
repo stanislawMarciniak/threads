@@ -18,6 +18,7 @@ import { ThreadValidation } from "@/lib/validations/thread";
 import { createThread } from "@/lib/actions/thread.actions";
 import { useOrganization } from "@clerk/nextjs";
 import { Input } from "../ui/input";
+import Image from "next/image";
 
 interface Props {
   userId: string;
@@ -59,7 +60,7 @@ function PostThread({ userId, userName }: Props) {
           name="thread"
           render={({ field }) => (
             <FormItem className="flex flex-col w-full gap-3">
-              <FormControl className="border no-focus border-dark-4 bg-dark-3 text-light-1">
+              <FormControl className="border no-focus border-dark-4 bg-dark-3 text-light-1 text-body-medium">
                 <Input
                   placeholder={`What are you thinking about, ${userName}?`}
                   type="text"
@@ -72,8 +73,13 @@ function PostThread({ userId, userName }: Props) {
           )}
         />
 
-        <Button type="submit" className="rounded-full bg-primary-500">
-          +
+        <Button type="submit" className="p-1 bg-transparent rounded-full">
+          <Image
+            src={"/assets/add.svg"}
+            alt="Submit thread"
+            width={40}
+            height={40}
+          />
         </Button>
       </form>
     </Form>
