@@ -18,10 +18,8 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${inter.className} bg-dark-1`}>
-          <div className="flex items-center justify-center w-full min-h-screen">
-            {children}
-          </div>
+        <body className={`${inter.className} bg-[url('/assets/auth-bg.png')]`}>
+          {children}
         </body>
       </html>
     </ClerkProvider>
