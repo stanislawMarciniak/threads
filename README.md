@@ -1,11 +1,19 @@
 # Threads Clone App
 
-This project is a clone of the Threads application. The project taught me how to use a NoSQL database and leverage the powerful Next.js SSR. It is built using TypeScript, Next.js, Tailwind CSS, and Shadcn UI. For creating both users and groups, I used Clerk. Additionally, MongoDB manages threads, users, and groups.
+This project is a clone of the Threads application. The project taught me how to use a NoSQL database and leverage the powerful Next.js SSR. It is built using TypeScript, Next.js, Tailwind CSS, and Shadcn UI. For creating both users and groups, I used Clerk. Additionally, MongoDB manages threads, users, and groups. Project is fully responsive.
 
-## Table of Contents
+## Live
 
-- Installation
-- Usage
+You can access the live of Threads at [https://threads-sm.vercel.app/](https://threads-sm.vercel.app/).
+
+## Technologies Used
+
+- Next.js
+- React
+- Clerk
+- MongoDB
+- Shadcn UI
+- Typescript
 
 ## Installation
 
