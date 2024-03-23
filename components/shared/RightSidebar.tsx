@@ -26,7 +26,7 @@ async function RightSidebar() {
           Suggested Communities
         </h3>
 
-        <div className="mt-7 flex w-[350px] flex-col gap-9">
+        <div className="mt-5 flex w-[350px] flex-col gap-9">
           {suggestedCOmmunities.communities.length > 0 ? (
             <>
               {suggestedCOmmunities.communities.map((community) => (
@@ -51,7 +51,7 @@ async function RightSidebar() {
 
       <div className="flex flex-col justify-start flex-1">
         <h3 className="text-heading4-medium text-light-1">Similar Minds</h3>
-        <div className="mt-7 flex w-[350px] flex-col gap-10">
+        <div className="mt-5 flex w-[350px] flex-col gap-10">
           {similarMinds.users.length > 0 ? (
             <>
               {similarMinds.users.map((person) => (
